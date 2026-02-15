@@ -11,7 +11,6 @@ TOKEN = config.get("TOKEN", "")
 # Download ffmpeg automatically if not present
 ensure_ffmpeg()
 
-client = discord.Client()
 prefix = "!"
 intents=discord.Intents.all()
 bot = commands.Bot(command_prefix=prefix, intents=intents)
@@ -21,11 +20,11 @@ bot.remove_command("help")
 async def on_ready():
     await bot.change_presence(status=discord.Status.dnd, activity=discord.Game("Bot music [HALAL!]"))
     print("We have logged in as {0.user}\nHappy dugem. [HALAL!]".format(bot))
-    bot.load_extension('Musiccommand')
+    await bot.load_extension('Musiccommand')
 
 @bot.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == bot.user:
         return
     
     if message.content.startswith(prefix+'automatic_play'):

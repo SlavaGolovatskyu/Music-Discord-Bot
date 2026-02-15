@@ -233,5 +233,5 @@ class Music(commands.Cog):
         else:
             return await ctx.send("You are not in a voice channel, you must be in a voice channel to run this command.")           
 
-def setup(bot):
-    bot.add_cog(Music(bot))
+async def setup(bot):
+    await bot.add_cog(Music(bot))
