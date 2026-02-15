@@ -15,9 +15,11 @@ echo Found: %SODIUM_PYD%
 echo.
 echo Building MusicBot.exe...
 pyinstaller --onefile --console --clean --name MusicBot ^
-    --hidden-import Musiccommand ^
-    --hidden-import config_loader ^
-    --hidden-import ffmpeg_setup ^
+    --hidden-import src.main ^
+    --hidden-import src.cogs.music ^
+    --hidden-import src.utils.config_loader ^
+    --hidden-import src.utils.ffmpeg_setup ^
+    --hidden-import src.utils.song_db ^
     --hidden-import discord ^
     --hidden-import yt_dlp ^
     --hidden-import aiohttp ^
@@ -39,7 +41,7 @@ pyinstaller --onefile --console --clean --name MusicBot ^
     --hidden-import nacl.hash ^
     --hidden-import nacl.utils ^
     --add-binary "%SODIUM_PYD%;nacl" ^
-    Main.py
+    run.py
 
 echo.
 echo Copying config.txt to dist folder...

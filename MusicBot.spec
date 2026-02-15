@@ -2,11 +2,11 @@
 
 
 a = Analysis(
-    ['Main.py'],
+    ['run.py'],
     pathex=[],
     binaries=[('C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\nacl\\_sodium.pyd', 'nacl')],
     datas=[],
-    hiddenimports=['Musiccommand', 'config_loader', 'ffmpeg_setup', 'discord', 'yt_dlp', 'aiohttp', '_cffi_backend', 'nacl', 'nacl._sodium', 'nacl.bindings', 'nacl.bindings.crypto_aead', 'nacl.bindings.crypto_box', 'nacl.bindings.crypto_secretbox', 'nacl.bindings.crypto_sign', 'nacl.bindings.utils', 'nacl.bindings.sodium_core', 'nacl.bindings.randombytes', 'nacl.public', 'nacl.secret', 'nacl.signing', 'nacl.encoding', 'nacl.hash', 'nacl.utils'],
+    hiddenimports=['src.main', 'src.cogs.music', 'src.utils.config_loader', 'src.utils.ffmpeg_setup', 'src.utils.song_db', 'discord', 'yt_dlp', 'aiohttp', '_cffi_backend', 'nacl', 'nacl._sodium', 'nacl.bindings', 'nacl.bindings.crypto_aead', 'nacl.bindings.crypto_box', 'nacl.bindings.crypto_secretbox', 'nacl.bindings.crypto_sign', 'nacl.bindings.utils', 'nacl.bindings.sodium_core', 'nacl.bindings.randombytes', 'nacl.public', 'nacl.secret', 'nacl.signing', 'nacl.encoding', 'nacl.hash', 'nacl.utils'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

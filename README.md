@@ -56,6 +56,7 @@ All commands use the `!` prefix.
 | `!skip`    | Skip to the next song in the queue             |
 | `!queue`   | View the current song queue                    |
 | `!lyric`   | Show lyrics for the current song               |
+| `!mostplayed` | Show the most played songs on the server    |
 | `!join`    | Make the bot join your voice channel            |
 | `!leave`   | Make the bot leave the voice channel            |
 | `!help`    | Show help with a random tip                    |
