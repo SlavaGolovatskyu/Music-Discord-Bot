@@ -5,7 +5,7 @@ from asyncio import sleep
 import urllib.parse
 import urllib.request
 import re
-import youtube_dl
+import yt_dlp as youtube_dl
 import aiohttp
 from config_loader import load_config
 
@@ -149,6 +149,7 @@ class Music(commands.Cog):
     async def automatic_play(self, ctx):
         if ctx.guild.id not in Queue:
             await ctx.send("No song in queue")
+            return
         if not (ctx.voice_client):
             channel = ctx.message.author.voice.channel
             voice = await channel.connect()
@@ -156,11 +157,8 @@ class Music(commands.Cog):
             voice = ctx.guild.voice_client
             
         with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
-            if Queue[ctx.guild.id][0]['from_playlist'] == True:
-                url2 = ydl.extract_info(Queue[ctx.guild.id][0]['url'], download=False)
-                url2 = url2['formats'][0]['url']
-            else:
-                url2 = Queue[ctx.guild.id][0].get('url', None)
+            info = ydl.extract_info(Queue[ctx.guild.id][0]['webpage_url'], download=False)
+            url2 = info['url']
             source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
             voice.play(source)
         
@@ -168,7 +166,7 @@ class Music(commands.Cog):
             await sleep(1)
         del(Queue[ctx.guild.id][0])
         if len(Queue[ctx.guild.id]) != 0:
-            await self.bot.get_command(name='automatic_play').callback(self, ctx)
+            await self.bot.get_command('automatic_play').callback(self, ctx)
         else:
             Queue.pop(ctx.guild.id,None)
             await voice.disconnect()
@@ -197,12 +195,13 @@ class Music(commands.Cog):
             ydl_opts = {
                 'quiet': True,
                 'skip_download': True,
+                'format': 'bestaudio/best',
             }
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url)
 
             Queue[ctx.guild.id].append(
-                {'url': info['formats'][0]['url'], 'title': info['title'], 'from_playlist': False})
+                {'webpage_url': info['webpage_url'], 'title': info['title']})
             
             if len(Queue[ctx.guild.id]) == 1:
                 await ctx.send(f'Now play ***{Queue[ctx.guild.id][0]["title"]}***\nSong ^^^ added ^^^ to queue')
@@ -210,7 +209,7 @@ class Music(commands.Cog):
                 await ctx.send(f"Song added to queue! : [***{Queue[ctx.guild.id][len(Queue[ctx.guild.id])]['title']}***]")
             
             if not (voice.is_playing() or voice.is_paused()):
-                await self.bot.get_command(name='automatic_play').callback(self, ctx)
+                await self.bot.get_command('automatic_play').callback(self, ctx)
         else:
             await ctx.send("You are not in a voice channel, you must be in a voice channel to run this command.")
             

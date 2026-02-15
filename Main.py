@@ -38,10 +38,13 @@ async def on_command_error(ctx, error):
             await ctx.send(f"{prefix}play [query|link musik]")
         else:
             await ctx.send("Missing required argument!")
-    if isinstance(error, commands.CommandNotFound):
+    elif isinstance(error, commands.CommandNotFound):
         await ctx.send("Command is unreachable")
-    if isinstance(error, commands.MissingPermissions):
+    elif isinstance(error, commands.MissingPermissions):
         await ctx.send("You dont have enough permission!")
+    else:
+        print(f"[ERROR] {ctx.command}: {error}")
+        await ctx.send(f"An error occurred: {error}")
 
 @bot.command(invoke_without_command = True)
 async def help(ctx):

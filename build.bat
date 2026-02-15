@@ -1,6 +1,6 @@
 @echo off
-echo Installing PyInstaller...
-pip install pyinstaller
+echo Installing dependencies...
+pip install pyinstaller PyNaCl
 
 echo.
 echo Building MusicBot.exe...
@@ -9,8 +9,9 @@ pyinstaller --onefile --console --name MusicBot ^
     --hidden-import config_loader ^
     --hidden-import ffmpeg_setup ^
     --hidden-import discord ^
-    --hidden-import youtube_dl ^
+    --hidden-import yt_dlp ^
     --hidden-import aiohttp ^
+    --hidden-import nacl ^
     Main.py
 
 echo.

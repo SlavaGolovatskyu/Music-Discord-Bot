@@ -1,6 +1,5 @@
 # MusicBot
 - Music discord that written on python3.8 & using discord.py module.
-- Don't forget to download ffmpeg to use this bot! (download here https://www.mediafire.com/file/941zek87zzx5gte/ffmpeg.exe/file)
 
 # Commands
 ```bash
@@ -13,12 +12,4 @@
 > join (new update) | func (join channel)
 > leave (new update) | func (leave channel)
 > stop (new update) | func (to stop the played song, and remove all song from queue)
-```
-
-# Credit
-```bash
-> Jounny (https://github.com/Jounnyy)
-> iFanpS
-> FyeTopia
-> Jefri
 ```
