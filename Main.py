@@ -3,9 +3,13 @@ import discord
 from discord.ext.commands import bot
 from discord.ext import commands
 from config_loader import load_config
+from ffmpeg_setup import ensure_ffmpeg
 
 config = load_config()
 TOKEN = config.get("TOKEN", "")
+
+# Download ffmpeg automatically if not present
+ensure_ffmpeg()
 
 client = discord.Client()
 prefix = "!"
