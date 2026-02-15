@@ -2,6 +2,8 @@
 
 A Discord music bot that plays audio from YouTube in voice channels.
 
+**No Python installation required.** The `dist/` folder contains a ready-to-use `MusicBot.exe` -- just configure your token and run it.
+
 ---
 
 ## Quick Start (no programming required)
@@ -25,9 +27,10 @@ A Discord music bot that plays audio from YouTube in voice channels.
 3. Under **Bot Permissions**, check: Connect, Speak, Send Messages, Read Message History
 4. Copy the generated URL and open it in your browser to invite the bot
 
-### 3. Configure the Bot
+### 3. Configure and Run
 
-Open `config.txt` (located next to `MusicBot.exe`) in any text editor and replace `your_bot_token_here` with your actual token:
+1. Open the `dist/` folder -- this is all you need
+2. Open `config.txt` (located next to `MusicBot.exe`) in any text editor and replace `your_bot_token_here` with your actual token:
 
 ```
 TOKEN=paste_your_bot_token_here
@@ -35,11 +38,11 @@ TOKEN=paste_your_bot_token_here
 
 The other settings have working defaults and can be left as-is. Only change them if you know what you're doing.
 
-### 4. Run the Bot
-
-Double-click `MusicBot.exe`. On the first launch it will automatically download FFmpeg (~80 MB) -- this only happens once.
+3. Double-click **`MusicBot.exe`** to start the bot. On the first launch it will automatically download FFmpeg (~80 MB) -- this only happens once.
 
 Once you see a message like `We have logged in as YourBot#1234`, the bot is online and ready.
+
+> **Note:** You do not need to install Python, any packages, or any other dependencies. Everything is bundled inside `MusicBot.exe`.
 
 ---
 
@@ -74,6 +77,38 @@ All commands use the `!` prefix.
 | `FFMPEG_URL`           | Download URL for FFmpeg (auto-install)   | `https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip` |
 
 Lines starting with `#` are treated as comments and ignored.
+
+---
+
+## Building from Source (developers only)
+
+If you want to modify the code and rebuild the executable yourself, you will need Python 3.10+ installed.
+
+```bash
+pip install -r requirements.txt
+build.bat
+```
+
+This will produce a fresh `MusicBot.exe` in the `dist/` folder.
+
+### Project Structure
+
+```
+MusicBot/
+├── run.py                       # entry point
+├── src/
+│   ├── main.py                  # bot setup, events, help command
+│   ├── cogs/
+│   │   └── music.py             # all music commands
+│   └── utils/
+│       ├── config_loader.py     # config.txt parser
+│       ├── ffmpeg_setup.py      # ffmpeg auto-download
+│       └── song_db.py           # JSON song play tracker
+├── config.txt                   # bot configuration
+├── build.bat                    # build script
+├── requirements.txt             # Python dependencies
+└── README.md
+```
 
 ---
 
